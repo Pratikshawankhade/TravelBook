@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -8,38 +9,42 @@
     <title>Travel Record Book</title>
     <title></title>
   </head>
-  <body>
+  <body {background-color:"blue"}>
+
     <div class="container">
-      <h1>Travel Book</h1>
+      <div class="jumbotron">
+      <h1> My Travel Book</h1>
+       </div>
       <div class="row">
         <div class="col-md-6">
           <hr>
-          <h2>Add a Record:</h2>
+      <h2 >Add Details of Visited Places:</h2>
+
           <form id="new-record">
             <div class="form-group">
-              <label for="new-first-name">City Name</label>
-              <input type="text"  class="form-control" id="new-first-name">
+              <label for="new-city-name">City Name</label>
+              <input type="text"  class="form-control" id="new-city-name">
             </div>
             <div class="form-group">
-              <label for="new-last-name">Year</label>
-              <input type="text"  class="form-control" id="new-last-name">
+              <label for="new-description">Description</label>
+              <input type="text"  class="form-control" id="new-description">
             </div>
             <div class="form-group">
-              <label for="new-phone-number">Landmarks</label>
-              <input type="text"  class="form-control" id="new-phone-number">
+              <label for="new-year">Year</label>
+              <input type="text"  class="form-control" id="new-year">
             </div>
             <button class="random" type="submit" class="btn-primary">Add</button>
           </form>
           <hr>
-          <h2>Track:</h2>
+          <button class="random2" type="submit">Amsterdam</button>
           <ul id="records">
           </ul>
         </div>
         <div class="col-md-6">
-          <div id="show-contact">
-            <p>City Name: <span class="first-name"></span></p>
-            <p>Year: <span class="last-name"></span></p>
-            <p>Landmark: <span class="phone-number"></span></p>
+          <div id="show-record">
+            <p>City Name: <span class="city-name"></span></p>
+            <p>Description: <span class="description"></span></p>
+            <p>Year: <span class="year"></span></p>
             <div id="buttons">
             </div>
           </div>

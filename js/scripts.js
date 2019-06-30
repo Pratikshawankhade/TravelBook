@@ -1,13 +1,12 @@
-
-// Business Logic for AddressBook ---------
+// Business Logic for TravelBook ---------
 function TravelBook() {
   this.records = [],
   this.currentId = 0
 }
 
-TravelBook.prototype.addContact = function(contact) {
-  contact.id = this.assignId();
-  this.records.push(contact);
+TravelBook.prototype.addDetail = function(track) {
+  track.id = this.assignId();
+  this.records.push(track);
 }
 
 TravelBook.prototype.assignId = function() {
@@ -15,7 +14,7 @@ TravelBook.prototype.assignId = function() {
   return this.currentId;
 }
 
-TravelBook.prototype.findContact = function(id) {
+TravelBook.prototype.findDetail = function(id) {
   for (var i=0; i< this.records.length; i++) {
     if (this.records[i]) {
       if (this.records[i].id == id) {
@@ -26,7 +25,7 @@ TravelBook.prototype.findContact = function(id) {
   return false;
 }
 
-TravelBook.prototype.deleteContact = function(id) {
+TravelBook.prototype.deleteDetail = function(id) {
   for (var i=0; i< this.records.length; i++) {
     if (this.records[i]) {
       if (this.records[i].id == id) {
@@ -38,38 +37,38 @@ TravelBook.prototype.deleteContact = function(id) {
   return false;
 }
 
-// Business Logic for Contacts ---------
-function Contact(firstName, lastName, phoneNumber) {
-  this.firstName = firstName,
-  this.lastName = lastName,
-  this.phoneNumber = phoneNumber
+// Business Logic for Records ---------
+function Book(cityName, newDescription, newYear) {
+  this.cityName = cityName,
+  this.newDescription = newDescription,
+  this.newYear = newYear
 }
 
-Contact.prototype.fullName = function() {
-  return this.firstName + " " + this.lastName;
+Book.prototype.cityName = function() {
+  return this.citytName + " " + this.newDescription;
 }
 
 // User Interface Logic ---------
 var travelBook = new TravelBook();
 
-function displayContactDetails(travelBookToDisplay) {
+function displayBookDetails(travelBookToDisplay) {
   var recordsList = $("ul#records");
   var htmlForContactInfo = "";
-  travelBookToDisplay.records.forEach(function(contact) {
-    htmlForContactInfo += "<li id=" + contact.id + ">" + contact.firstName + " " + contact.lastName + "</li>";
+  travelBookToDisplay.records.forEach(function(track) {
+    htmlForContactInfo += "<li id=" + track.id + ">" + track.cityName + " " + track.newDescription + "</li>";
   });
 recordsList.html(htmlForContactInfo);
 };
 
-function showContact(contactId) {
-  var contact = travelBook.findContact(contactId);
-  $("#show-contact").show();
-  $(".first-name").html(contact.firstName);
-  $(".last-name").html(contact.lastName);
-  $(".phone-number").html(contact.phoneNumber);
+function showContact(trackId) {
+  var track = travelBook.findDetail(trackId);
+  $("#show-record").show();
+  $(".city-name").html(track.cityName);
+  $(".description").html(track.newDescription);
+  $(".year").html(track.newYear);
   var buttons = $("#buttons");
   buttons.empty();
-  buttons.append("<button class='deleteButton' id=" + contact.id + ">Delete</button>");
+  buttons.append("<button class='deleteButton' id=" + track.id + ">Delete</button>");
 }
 
 function attachContactListeners() {
@@ -77,9 +76,9 @@ function attachContactListeners() {
     showContact(this.id);
   });
   $("#buttons").on("click", ".deleteButton", function() {
-    travelBook.deleteContact(this.id);
+    travelBook.deleteDetail(this.id);
     $("#show-record").hide();
-    displayContactDetails(travelBook);
+    displayBookDetails(travelBook);
   });
 };
 
@@ -87,14 +86,14 @@ $(document).ready(function() {
   attachContactListeners();
   $("form#new-record").submit(function(event) {
     event.preventDefault();
-    var inputtedFirstName = $("input#new-first-name").val();
-    var inputtedLastName = $("input#new-last-name").val();
-    var inputtedPhoneNumber = $("input#new-phone-number").val();
-    $("input#new-first-name").val("");
-    $("input#new-last-name").val("");
-    $("input#new-phone-number").val("");
-    var newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
-    travelBook.addContact(newContact);
-    displayContactDetails(travelBook);
+    var inputtedCityName = $("input#new-city-name").val();
+    var inputtedDescription = $("input#new-description").val();
+    var inputtedYear = $("input#new-year").val();
+    $("input#new-city-name").val("");
+    $("input#new-description").val("");
+    $("input#new-year").val("");
+    var newContact = new Book(inputtedCityName, inputtedDescription, inputtedYear);
+    travelBook.addDetail(newContact);
+    displayBookDetails(travelBook);
   })
 })
